@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBigStats</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>MyBigStats</h1>
+      <p>Statistiques sportives</p>
+    </div>
+    <nav id="sportNav"></nav>
+  </header>
+
+  <main>
+    <section id="message"></section>
+
+    <section class="top">
+      <div>
+        <h2 id="pageTitle">Accueil</h2>
+        <p id="pageSubtitle">Chargement des données...</p>
+      </div>
+      <button id="homeButton" type="button">Accueil</button>
+    </section>
+
+    <section id="home"></section>
+
+    <section id="sportPage" class="hidden">
+      <div class="tabs">
+        <button class="tab active" type="button" data-tab="stats">Stats</button>
+        <button class="tab" type="button" data-tab="history">Historique</button>
+        <button class="tab" type="button" data-tab="athletes">Joueurs / combattants</button>
+      </div>
+
+      <section id="statsTab"></section>
+      <section id="historyTab" class="hidden"></section>
+      <section id="athletesTab" class="hidden">
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Rechercher un athlète">
+          <select id="positionSelect">
+            <option value="">Toutes les positions</option>
+          </select>
+        </div>
+
+        <div id="athleteList" class="grid"></div>
+
+        <div class="compare">
+          <h3>Comparer deux athlètes</h3>
+          <div class="filters">
+            <select id="compareA"></select>
+            <select id="compareB"></select>
+          </div>
+          <div id="compareResult"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/rencontres.js"></script>
+  <script src="js/comparateur.js"></script>
+  <script src="js/athletes.js"></script>
+  <script src="js/sports.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
