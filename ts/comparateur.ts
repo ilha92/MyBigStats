@@ -1,7 +1,9 @@
 function remplirComparateur() {
-  const options = athletesDuSport().map((athlete: PetitAthlete) => {
-    return `<option value="${athlete.id}">${athlete.first_name} ${athlete.last_name}</option>`;
-  }).join("");
+  const options = athletesDuSport()
+    .map((athlete: PetitAthlete) => {
+      return `<option value="${athlete.id}">${athlete.first_name} ${athlete.last_name}</option>`;
+    })
+    .join("");
 
   compareA.innerHTML = options;
   compareB.innerHTML = options;
@@ -12,8 +14,12 @@ function remplirComparateur() {
 }
 
 function afficherComparaison() {
-  const athleteA = athletes.find((athlete) => athlete.id === Number(compareA.value));
-  const athleteB = athletes.find((athlete) => athlete.id === Number(compareB.value));
+  const athleteA = athletes.find(
+    (athlete) => athlete.id === Number(compareA.value),
+  );
+  const athleteB = athletes.find(
+    (athlete) => athlete.id === Number(compareB.value),
+  );
 
   if (!athleteA || !athleteB) {
     compareResult.innerHTML = "";
@@ -25,9 +31,10 @@ function afficherComparaison() {
     return;
   }
 
+  // Sinon renvoie la comparaison
   cacherErreur();
 
-  const cles = Object.keys(athleteA.stats)
+  const getStats = Object.keys(athleteA.stats)
     .filter((cle) => athleteB.stats[cle] !== undefined)
     .slice(0, 5);
 
@@ -43,14 +50,14 @@ function afficherComparaison() {
           </tr>
         </thead>
         <tbody>
-          ${cles.map((cle) => ligneTableau(cle, athleteA.stats[cle], athleteB.stats[cle])).join("")}
+          ${getStats.map((cle) => ligneTableau(cle, athleteA.stats[cle], athleteB.stats[cle])).join("")}
         </tbody>
       </table>
 
       <button id="chartButton" type="button">Afficher le camembert</button>
 
       <div id="chartBox" class="chart hidden">
-        ${camembert(athleteA, athleteB, cles)}
+        ${camembert(athleteA, athleteB, getStats)}
       </div>
     </div>
   `;
@@ -69,9 +76,9 @@ function ligneTableau(cle: string, valeurA: number, valeurB: number) {
   `;
 }
 
-function camembert(athleteA: Athlete, athleteB: Athlete, cles: string[]) {
-  const totalA = totalStats(athleteA, cles);
-  const totalB = totalStats(athleteB, cles);
+function camembert(athleteA: Athlete, athleteB: Athlete, getStats: string[]) {
+  const totalA = totalStats(athleteA, getStats);
+  const totalB = totalStats(athleteB, getStats);
   const total = totalA + totalB;
   const pourcentageA = total === 0 ? 50 : Math.round((totalA / total) * 100);
   const pourcentageB = 100 - pourcentageA;
@@ -88,8 +95,8 @@ function camembert(athleteA: Athlete, athleteB: Athlete, cles: string[]) {
   `;
 }
 
-function totalStats(athlete: Athlete, cles: string[]) {
-  return cles.reduce((total, cle) => total + Number(athlete.stats[cle]), 0);
+function totalStats(athlete: Athlete, getStats: string[]) {
+  return getStats.reduce((total, cle) => total + Number(athlete.stats[cle]), 0);
 }
 
 function afficherOuCacherCamembert() {
