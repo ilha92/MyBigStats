@@ -1,6 +1,6 @@
 # MyBigStats
 
-Projet en HTML, CSS et TypeScript.
+Projet en HTML, CSS et TypeScript et Javascript.
 
 ## Lancer le projet
 
